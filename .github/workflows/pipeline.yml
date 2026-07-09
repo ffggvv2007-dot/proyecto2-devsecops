@@ -1,0 +1,16 @@
+name: Mi primer pipeline
+
+on:
+  push:
+
+jobs:
+  primer-trabajo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4        #Sin este paso, la máquina no tendría tu proyecto.
+
+      - name: Mostrar un mensaje
+        run: echo "Hola desde GitHub Actions"
+      

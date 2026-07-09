@@ -11,6 +11,14 @@ jobs:
       - name: Descargar el repositorio
         uses: actions/checkout@v4        #Sin este paso, la máquina no tendría tu proyecto.
 
+      - name: Configurar Python          #sirve para preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Comprobar versión de Python               #queremos comprobar que realmente se ha configurado.
+        run: python --version
+
       - name: Mostrar un mensaje
         run: echo "Hola desde GitHub Actions"
       

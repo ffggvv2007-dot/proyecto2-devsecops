@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4        #Sin este paso, la máquina no tendría tu proyecto.
 
       - name: Configurar Python          #sirve para preparar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5    #uses significa que vamos a reutilizar una acción de GitHub, en este caso la acción setup-python.
         with:
           python-version: '3.13'
 
@@ -22,6 +22,16 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
+      - name: Analizar con Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs               #Analiza los archivos del proyecto.
+          scan-ref: .                 #el punto significa la carpeta actual, es decir, el proyecto.
+          scanners: vuln              #Utiliza el escáner de vulnerabilidades.
+          format: table
+          exit-code: '0'              #Cuando termines, devuelve el código de salida 0.
+          ignore-unfixed: true
+      
       - name: Mostrar un mensaje
         run: echo "Hola desde GitHub Actions"
       

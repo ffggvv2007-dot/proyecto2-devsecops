@@ -19,6 +19,9 @@ jobs:
       - name: Comprobar versión de Python               #queremos comprobar que realmente se ha configurado.
         run: python --version
 
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
       - name: Mostrar un mensaje
         run: echo "Hola desde GitHub Actions"
       

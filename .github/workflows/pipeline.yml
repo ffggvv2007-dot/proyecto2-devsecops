@@ -31,7 +31,21 @@ jobs:
           format: table
           exit-code: '0'              #Cuando termines, devuelve el código de salida 0.
           ignore-unfixed: true
-      
+
+      - name: Analizar dependencias con OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: "Proyecto2-DevSecOps"                  #da un nombre al proyecto dentro del informe que generará Dependency-Check.
+          path: .                                         #directorio actual
+          format: "HTML"                                  #Genera el informe en formato HTML
+          out: reports                                    #escribe en reports.
+
+      - name: Subir informe Dependency-Check              #sube el informe generado.
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report                   #nombre del artefacto que se subirá.
+          path: reports                                   #Sube la carpeta reports
+
       - name: Mostrar un mensaje
         run: echo "Hola desde GitHub Actions"
       
